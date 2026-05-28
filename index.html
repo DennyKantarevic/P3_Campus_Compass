@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UF Campus Navigator</title>
+  </head>
+  <body>
+    <div id="loadingScreen" class="loading-screen" role="status" aria-live="polite">
+      <div class="loading-card">
+        <div class="loading-badge" aria-hidden="true">UF</div>
+        <p class="loading-kicker">Go Gators</p>
+        <p class="loading-title">UF Campus Navigator</p>
+        <p class="loading-copy">Loading your campus route...</p>
+        <div class="loading-path" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="loading-progress" aria-hidden="true">
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <p class="uf-banner">UF</p>
+          <div>
+            <h1>UF Campus Navigator</h1>
+            <span class="brand-subtitle">Plan your walk between classes.</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-badges" aria-label="Navigator features">
+            <span>Walking Routes</span>
+            <span>Class Gap Alerts</span>
+            <span>Campus Planner</span>
+          </div>
+          <div class="time-chip">
+            <span id="currentDate">Today</span>
+            <strong id="currentTime">--:--</strong>
+          </div>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="panel route-panel" aria-label="Route controls">
+          <section class="panel-section">
+            <p class="section-kicker">Gator Route Lab</p>
+            <h2>Route</h2>
+            <label for="startSelect">Start</label>
+            <select id="startSelect"></select>
+
+            <label for="destinationSelect">Destination</label>
+            <select id="destinationSelect"></select>
+
+            <div class="button-row">
+              <button id="swapRoute" type="button">Swap</button>
+              <button id="resetView" type="button">Reset view</button>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-kicker">Blue Campus Pins</p>
+            <h2>Marker Target</h2>
+            <div class="segmented-control" role="radiogroup" aria-label="Marker target">
+              <label>
+                <input type="radio" name="markerTarget" value="start" checked />
+                <span>Start</span>
+              </label>
+              <label>
+                <input type="radio" name="markerTarget" value="destination" />
+                <span>Destination</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-kicker">Orange Path</p>
+            <h2>Recommended Path</h2>
+            <p class="route-mode">Walking route and duration use free OpenStreetMap routing data.</p>
+            <p id="routeSummary" class="route-summary">Loading campus graph...</p>
+            <div class="route-metrics" aria-label="Route walking time and distance">
+              <div>
+                <span>Walk time</span>
+                <strong id="routeWalkTime">--</strong>
+              </div>
+              <div>
+                <span>Distance</span>
+                <strong id="routeDistance">--</strong>
+              </div>
+            </div>
+            <ol id="routeSteps" class="route-steps"></ol>
+          </section>
+        </aside>
+
+        <section class="map-shell" aria-label="UF campus map">
+          <div id="statusBanner" class="status-banner" hidden></div>
+          <div id="map"></div>
+        </section>
+
+        <aside class="panel schedule-panel" aria-label="Schedule controls">
+          <div id="scheduleWarning" class="schedule-warning" hidden></div>
+
+          <section class="panel-section">
+            <p class="section-kicker">Gator Schedule</p>
+            <h2>Schedule</h2>
+            <label for="classSelect">Class</label>
+            <select id="classSelect"></select>
+            <button id="addClass" type="button">Add class</button>
+          </section>
+
+          <section class="panel-section">
+            <p class="section-kicker">Swamp Stop</p>
+            <h2>Event</h2>
+            <label for="eventTitle">Title</label>
+            <input id="eventTitle" type="text" placeholder="Study group" />
+
+            <label for="eventLocation">Location</label>
+            <select id="eventLocation"></select>
+
+            <div class="time-grid">
+              <label for="eventStart">Start</label>
+              <label for="eventEnd">End</label>
+              <input id="eventStart" type="time" value="13:00" />
+              <input id="eventEnd" type="time" value="14:00" />
+            </div>
+
+            <button id="addEvent" type="button">Add event</button>
+          </section>
+
+          <section class="panel-section schedule-list-section">
+            <div class="section-heading-row">
+              <div>
+                <p class="section-kicker">Today in the Swamp</p>
+                <h2>Today</h2>
+              </div>
+              <button id="clearSchedule" type="button" class="ghost-button">Clear</button>
+            </div>
+            <p id="nextEvent" class="next-event">No scheduled events.</p>
+            <ul id="scheduleList" class="schedule-list"></ul>
+          </section>
+        </aside>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
